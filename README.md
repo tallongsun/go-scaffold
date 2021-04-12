@@ -1,11 +1,5 @@
 # go-scaffold
 
-git clone https://github.com/tallongsun/go-scaffold.git
-cd go-scaffold
-go mod init github.com/tallongsun/go-scaffold
-
-
-
 # build
 ```
 git clone https://github.com/tallongsun/go-scaffold.git
