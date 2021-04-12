@@ -1,2 +1,5 @@
 ginMode: debug
 port: 8080
+
+mysql:
+  datasource: root:@tcp(127.0.0.1:3306)/demo?charset=utf8&parseTime=true

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/tallongsun/go-scaffold/pkg/controller"
 	"github.com/tallongsun/go-scaffold/pkg/lib/config"
+	"github.com/tallongsun/go-scaffold/pkg/lib/db"
 	"github.com/tallongsun/go-scaffold/pkg/lib/log"
 	"github.com/tallongsun/go-scaffold/pkg/router"
 	"os"
@@ -21,6 +22,9 @@ func init() {
 
 	log.Init()
 	fmt.Println("log initialized")
+
+	db.Init()
+	fmt.Println("db initialized")
 }
 
 func main() {
@@ -42,6 +46,7 @@ func signalHandler() {
 			//graceful shutdown
 			controller.Disable()
 			router.Stop()
+			db.Stop()
 			log.Logger.Info("application stopped")
 			return
 		case syscall.SIGHUP:

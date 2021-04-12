@@ -17,8 +17,7 @@ func Start() {
 	gin.SetMode(config.Config.GetString("ginMode"))
 	router := gin.Default()
 
-	mn := router.Group("/monitor")
-	mn.GET("/l7check", controller.L7Check)
+	setupRoute(router)
 
 	httpServer = &http.Server{
 		Addr:    fmt.Sprintf(":%s", config.Config.GetString("port")),
@@ -30,6 +29,18 @@ func Start() {
 			log.Logger.Errorf("router serve err: %v", err)
 		}
 	}()
+}
+
+func setupRoute(router *gin.Engine) {
+	mn := router.Group("/monitor")
+	mn.GET("/l7check", controller.L7Check)
+
+	apiG := router.Group("/api")
+	apiG.GET("/users", controller.ListUsers)
+	apiG.GET("/users/:id", controller.GetUser)
+	apiG.POST("/users", controller.CreateUser)
+	apiG.PUT("/users/:id", controller.UpdateUser)
+	apiG.DELETE("/users/:id", controller.DeleteUser)
 }
 
 func Stop() {
