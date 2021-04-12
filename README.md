@@ -1,6 +1,6 @@
 # go-scaffold
 
-# build
+## build
 ```
 git clone https://github.com/tallongsun/go-scaffold.git
 cd go-scaffold
@@ -9,14 +9,14 @@ go build cmd/demo/main.go
 RUN_MODE=alpha ./main
 ```
 
-# module management
+## module management
 ```
 git clone https://github.com/tallongsun/go-scaffold.git
 cd go-scaffold
 go mod init github.com/tallongsun/go-scaffold
 ```
 
-# test
+## test
 ```
 curl http://localhost:8080/api/users 
 ```
