@@ -35,7 +35,7 @@ func GetUser(c *gin.Context) {
 
 func CreateUser(c *gin.Context) {
 	userCreateReq := &dto.UserCreateReq{}
-	err := c.BindJSON(userCreateReq)
+	err := c.ShouldBindJSON(userCreateReq)
 	if err != nil {
 		log.Logger.Errorf("parse user err %v ", err)
 		c.String(http.StatusBadRequest, err.Error())
@@ -63,7 +63,7 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 	userUpdateReq := &dto.UserUpdateReq{}
-	err = c.BindJSON(userUpdateReq)
+	err = c.ShouldBindJSON(userUpdateReq)
 	if err != nil {
 		log.Logger.Errorf("parse user err %v ", err)
 		c.String(http.StatusBadRequest, err.Error())
@@ -71,8 +71,10 @@ func UpdateUser(c *gin.Context) {
 	}
 	user := model.User{
 		Id:        id,
-		Name:      userUpdateReq.Name,
 		UpdatedAt: time.Now(),
+	}
+	if userUpdateReq.Name != "" {
+		user.Name = userUpdateReq.Name
 	}
 	_, err = dao.UpdateUser(&user)
 	if err != nil {

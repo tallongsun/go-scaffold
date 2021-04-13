@@ -3,11 +3,11 @@ package dto
 import "time"
 
 type UserCreateReq struct {
-	Name string `json:"name"`
+	Name string `json:"name" binding:"required"`
 }
 
 type UserUpdateReq struct {
-	Name string `json:"name"`
+	Name string `json:"name" binding:"-"`
 }
 
 type UserRes struct {
